@@ -8,6 +8,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.database import engine, Base
+from app.models import Airline, Carousel, Flight, Assignment  # noqa: F401
+
 
 # =============================================================================
 # Lifespan (App startup/shutdown events)
@@ -22,13 +25,16 @@ async def lifespan(app: FastAPI):
     """
     # === Startup ===
     print("BetaShift server starting...")
-    # TODO: Create DB tables, load initial data, etc.
+
+    # Create all tables if they don't exist
+    print("Creating database tables...")
+    Base.metadata.create_all(bind=engine)
+    print("Database tables ready!")
 
     yield  # App runs at this point
 
     # === Shutdown ===
     print("BetaShift server shutting down...")
-    # TODO: Resource cleanup
 
 
 # =============================================================================
@@ -60,16 +66,15 @@ app.add_middleware(
 
 
 # =============================================================================
-# Router Registration (To be added later)
+# Router Registration
 # =============================================================================
 
-# TODO: Register routers as shown below
-# from app.routers import flights, carousels, assignments, airlines
-#
-# app.include_router(flights.router, prefix="/api/flights", tags=["flights"])
-# app.include_router(carousels.router, prefix="/api/carousels", tags=["carousels"])
-# app.include_router(assignments.router, prefix="/api/assignments", tags=["assignments"])
-# app.include_router(airlines.router, prefix="/api/airlines", tags=["airlines"])
+from app.routers import airlines, carousels, flights, assignments
+
+app.include_router(airlines.router, prefix="/api/airlines", tags=["airlines"])
+app.include_router(carousels.router, prefix="/api/carousels", tags=["carousels"])
+app.include_router(flights.router, prefix="/api/flights", tags=["flights"])
+app.include_router(assignments.router, prefix="/api/assignments", tags=["assignments"])
 
 
 # =============================================================================
