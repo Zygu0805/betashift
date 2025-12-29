@@ -213,47 +213,55 @@
 - [x] DB 연결 테스트
 
 #### Step 1.4: 테이블 생성 (Models)
-- [ ] `models/flight.py` - Flight 모델
-- [ ] `models/carousel.py` - Carousel 모델
-- [ ] `models/assignment.py` - Assignment 모델
-- [ ] `models/airline.py` - Airline 모델
-- [ ] 테이블 자동 생성 확인
+- [x] `models/flight.py` - Flight 모델
+- [x] `models/carousel.py` - Carousel 모델
+- [x] `models/assignment.py` - Assignment 모델
+- [x] `models/airline.py` - Airline 모델
+- [x] `models/__init__.py` - 모델 export
+- [x] 테이블 자동 생성 확인 (main.py lifespan에서 자동 생성)
 
 ---
 
 ### Phase 2: 기본 CRUD API 구현
 
 #### Step 2.1: Pydantic 스키마 정의
-- [ ] `schemas/flight.py` - Flight 스키마
-- [ ] `schemas/carousel.py` - Carousel 스키마
-- [ ] `schemas/assignment.py` - Assignment 스키마
-- [ ] `schemas/airline.py` - Airline 스키마
+- [x] `schemas/flight.py` - Flight 스키마
+- [x] `schemas/carousel.py` - Carousel 스키마
+- [x] `schemas/assignment.py` - Assignment 스키마
+- [x] `schemas/airline.py` - Airline 스키마
+- [x] `schemas/__init__.py` - 스키마 export
 
 #### Step 2.2: 항공편 API
-- [ ] `routers/flights.py` 생성
-- [ ] GET `/api/flights` - 목록 조회
-- [ ] GET `/api/flights/{flight_id}` - 상세 조회
-- [ ] POST `/api/flights` - 생성
-- [ ] POST `/api/flights/upload` - JSON 벌크 업로드
-- [ ] Swagger UI에서 테스트
+- [x] `routers/flights.py` 생성
+- [x] GET `/api/flights` - 목록 조회 (날짜 필터)
+- [x] GET `/api/flights/{flight_id}` - 상세 조회
+- [x] POST `/api/flights` - 생성
+- [x] POST `/api/flights/upload` - JSON 벌크 업로드
+- [x] DELETE `/api/flights/{flight_id}` - 삭제
+- [x] Swagger UI에서 테스트
 
 #### Step 2.3: 캐로셀 API
-- [ ] `routers/carousels.py` 생성
-- [ ] GET `/api/carousels` - 목록 조회
-- [ ] GET `/api/carousels/{carousel_id}` - 상세 조회
-- [ ] POST `/api/carousels/init` - 초기 데이터 생성 (C1~C24)
+- [x] `routers/carousels.py` 생성
+- [x] GET `/api/carousels` - 목록 조회
+- [x] GET `/api/carousels/{carousel_id}` - 상세 조회
+- [x] POST `/api/carousels` - 생성
+- [x] PATCH `/api/carousels/{carousel_id}` - 수정
+- [x] POST `/api/carousels/init` - 초기 데이터 생성 (C1~C24)
 
 #### Step 2.4: 항공사 API
-- [ ] `routers/airlines.py` 생성
-- [ ] GET `/api/airlines` - 목록 조회 (색상 정보 포함)
-- [ ] POST `/api/airlines` - 생성
+- [x] `routers/airlines.py` 생성
+- [x] GET `/api/airlines` - 목록 조회 (색상 정보 포함)
+- [x] GET `/api/airlines/{airline_code}` - 상세 조회
+- [x] POST `/api/airlines` - 생성
+- [x] POST `/api/airlines/init` - 기본 항공사 초기화
 
 #### Step 2.5: 배정 API (기본)
-- [ ] `routers/assignments.py` 생성
-- [ ] GET `/api/assignments` - 목록 조회 (날짜 필터)
-- [ ] POST `/api/assignments` - 배정 생성
-- [ ] PUT `/api/assignments/{id}` - 배정 수정
-- [ ] DELETE `/api/assignments/{id}` - 배정 삭제
+- [x] `routers/assignments.py` 생성
+- [x] GET `/api/assignments` - 목록 조회 (날짜 필터)
+- [x] GET `/api/assignments/{assignment_id}` - 상세 조회
+- [x] POST `/api/assignments` - 배정 생성
+- [x] PUT `/api/assignments/{id}` - 배정 수정
+- [x] DELETE `/api/assignments/{id}` - 배정 삭제
 
 ---
 
@@ -420,20 +428,18 @@
 
 ## 📌 TODO (다음 작업)
 
-> **마지막 작업일**: 2025-12-14
+> **마지막 작업일**: 2025-12-15
 
 ### 다음에 이어서 할 작업
-1. `models/flight.py` 작성 - Flight 모델
-2. `models/carousel.py` 작성 - Carousel 모델
-3. `models/assignment.py` 작성 - Assignment 모델
-4. `models/airline.py` 작성 - Airline 모델
-5. 테이블 자동 생성 확인
-6. (선택) `/db-test` 임시 엔드포인트 삭제
+1. 충돌 검증 로직 구현 (Step 3.1)
+2. 배정 검증 API 구현 (Step 3.2)
+3. 수동 배정 완성 (Step 3.3)
+4. (선택) `/db-test` 임시 엔드포인트 삭제
 
 ### 현재 진행 상황
-- **Phase 1 진행 중** (Backend 환경설정 및 DB 구축)
-- Step 1.1 ~ 1.3 완료
-- Step 1.4 (테이블 생성) 진행 예정
+- **Phase 1 완료** (Backend 환경설정 및 DB 구축) ✅
+- **Phase 2 완료** (기본 CRUD API 구현) ✅
+- **Phase 3 진행 예정** (배정 로직 구현)
 
 ### 참고 사항
 - PostgreSQL 접속: `psql -U postgres`
@@ -484,4 +490,4 @@ alphashift/
 
 ---
 
-*최종 업데이트: 2025-12-08*
+*최종 업데이트: 2025-12-15*
